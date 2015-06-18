@@ -8,20 +8,15 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController UITextFieldDelegate
+private var myTextField: UITextField!
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+override func viewDidLoad->(){
+    
 
 
-}
+    
+
 
 let myTextField:UITextField =
 UITextField(frame:CGRectMake(0,0,500,30))
@@ -45,4 +40,6 @@ func textFieldShouldEndEditing(textField:UITextField) ->Bool{
 func textFieldShouldReturn(textField:UITextField)->Bool{
     textField.resignFirstResponder()
     return true
+}
+
 }

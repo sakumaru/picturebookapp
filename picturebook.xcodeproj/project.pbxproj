@@ -13,7 +13,6 @@
 		AFDFEB821B32939200D845B7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AFDFEB811B32939200D845B7 /* Images.xcassets */; };
 		AFDFEB851B32939200D845B7 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AFDFEB831B32939200D845B7 /* LaunchScreen.xib */; };
 		AFDFEB911B32939200D845B7 /* picturebookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AFDFEB901B32939200D845B7 /* picturebookTests.swift */; };
-		AFDFEB9B1B329A1100D845B7 /* 22628920.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = AFDFEB9A1B329A1100D845B7 /* 22628920.jpeg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +36,6 @@
 		AFDFEB8A1B32939200D845B7 /* picturebookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = picturebookTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AFDFEB8F1B32939200D845B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AFDFEB901B32939200D845B7 /* picturebookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = picturebookTests.swift; sourceTree = "<group>"; };
-		AFDFEB9A1B329A1100D845B7 /* 22628920.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 22628920.jpeg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -82,7 +80,6 @@
 				AFDFEB7A1B32939200D845B7 /* AppDelegate.swift */,
 				AFDFEB7C1B32939200D845B7 /* ViewController.swift */,
 				AFDFEB7E1B32939200D845B7 /* Main.storyboard */,
-				AFDFEB9A1B329A1100D845B7 /* 22628920.jpeg */,
 				AFDFEB811B32939200D845B7 /* Images.xcassets */,
 				AFDFEB831B32939200D845B7 /* LaunchScreen.xib */,
 				AFDFEB781B32939200D845B7 /* Supporting Files */,
@@ -195,7 +192,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AFDFEB9B1B329A1100D845B7 /* 22628920.jpeg in Resources */,
 				AFDFEB801B32939200D845B7 /* Main.storyboard in Resources */,
 				AFDFEB851B32939200D845B7 /* LaunchScreen.xib in Resources */,
 				AFDFEB821B32939200D845B7 /* Images.xcassets in Resources */,

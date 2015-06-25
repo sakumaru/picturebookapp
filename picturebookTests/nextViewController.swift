@@ -8,7 +8,7 @@
 
 import UIKit
 
-class nextViewController: UIViewController,UITextFieldDelegate,UIScrollViewDelegate {
+class nextViewController: UIViewController{
     
     @IBOutlet weak var myTextField: UITextField!
     
@@ -34,6 +34,7 @@ class nextViewController: UIViewController,UITextFieldDelegate,UIScrollViewDeleg
         var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate //AppDelegateオブジェクトの呼び出し。as ◯◯はSwiftのキャスト表現
         appDelegate.ViewVal = myTextField.text // TextFieldの値を取得し、値引き渡し用のプロパティにセット
     }
+    
     
   
     

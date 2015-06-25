@@ -8,7 +8,11 @@
 
 import UIKit
 
-class ViewController2: UIViewController {
+class ViewController2: UIViewController ,UITableViewDataSource,UITableViewDelegate{
+    @IBAction func myHome(sender: UIButton) {
+        
+       self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+    }
     @IBOutlet weak var myLabel: UILabel!
 
     override func viewDidLoad() {
@@ -16,17 +20,29 @@ class ViewController2: UIViewController {
 
         // Do any additional setup after loading the view.
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillAppear(animated: Bool) {
-        super.viewDidDisappear(animated)
-        var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        myLabel.text =  appDelegate.ViewVal // Labelに値引き渡し用のプロパティから取得して設定する。
+    //表示するセルの中身
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+        
+        return cell
     }
+    
+    //行数
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 10
+    }
+    
+    
     
 
     /*

@@ -154,13 +154,10 @@
                                 <state key="normal" title="ホーム">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="myHome:" destination="hvk-eo-stD" eventType="touchUpInside" id="LFr-Yi-yR5"/>
+                                </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BI6-r7-sv1">
-                                <rect key="frame" x="29" y="118" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mc5-lZ-Pip">
                                 <rect key="frame" x="23" y="28" width="30" height="30"/>
                                 <state key="normal" title="戻る">
@@ -170,13 +167,18 @@
                                     <segue destination="zD7-Pb-mj4" kind="unwind" unwindAction="returnMenu:" id="M4h-Lo-OVW"/>
                                 </connections>
                             </button>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="5VS-Te-HKo">
+                                <rect key="frame" x="0.0" y="66" width="320" height="502"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="hvk-eo-stD" id="Tqr-4p-MP8"/>
+                                    <outlet property="delegate" destination="hvk-eo-stD" id="8SC-yT-XZW"/>
+                                </connections>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
-                    <connections>
-                        <outlet property="myLabel" destination="BI6-r7-sv1" id="H8k-5m-5K6"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="f5n-2O-Vzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="zD7-Pb-mj4" userLabel="Exit" sceneMemberID="exit"/>

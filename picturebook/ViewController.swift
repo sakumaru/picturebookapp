@@ -10,9 +10,12 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+  
     }
     
     override func didReceiveMemoryWarning() {
@@ -20,7 +23,18 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject!) {
+        if (segue.identifier == "next") {
+        }
+    }
+    
+    @IBAction func push(sender : UIButton) {
+        performSegueWithIdentifier("next",sender: nil)
+    }
+    
     @IBAction func returnMenu(segue: UIStoryboardSegue){
+        if (segue.identifier == "戻る") {
+        }
         
     }
     

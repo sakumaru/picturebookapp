@@ -22,7 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewVal = newValue // TextFieldの値をここに設定する。
         }
     }
-
+    
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.

@@ -10,7 +10,10 @@ import UIKit
 
 class nextViewController: UIViewController{
     
+    
     @IBOutlet weak var myTextField: UITextField!
+    
+    
     
     
     
@@ -21,21 +24,27 @@ class nextViewController: UIViewController{
         // Do any additional setup after loading the view.
         }
     
-       
-        
+    //リターンキーが押されたとき
+    @IBAction func tapReturnKey(sender: UITextField) {
+        //ユーザーデフォルトを用意する
+        var myDefault = NSUserDefaults.standardUserDefaults()
+        //データを書き込んで
+        myDefault.setObject(sender.text, forKey: "myString")
+        //即反映させる
+        myDefault.synchronize()
+    }
   
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewDidDisappear(animated) //エフェクト関係のパラメタだと思うが、今回は使用しないので、基底クラスを呼び出して、終わり。
-        var appDelegate: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate //AppDelegateオブジェクトの呼び出し。as ◯◯はSwiftのキャスト表現
-        appDelegate.ViewVal = myTextField.text // TextFieldの値を取得し、値引き渡し用のプロパティにセット
-    }
+        
+    @IBOutlet weak var myTextView: UITextView!
     
     
+    
+    @IBOutlet weak var myTextView2: UITextView!
   
     
     
@@ -45,11 +54,7 @@ class nextViewController: UIViewController{
         
     }
     
-    @IBAction func tapReturnKey(sender: UITextField) {
-         myTextField.resignFirstResponder()
-
-    }
-
+    
     
     
 

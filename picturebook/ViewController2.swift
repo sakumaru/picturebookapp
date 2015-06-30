@@ -8,42 +8,96 @@
 
 import UIKit
 
-class ViewController2: UIViewController ,UITableViewDataSource,UITableViewDelegate{
+class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSource{
+    
     @IBAction func myHome(sender: UIButton) {
         
-       self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
+        
     }
-    @IBOutlet weak var myLabel: UILabel!
-
+    
+    
+    @IBOutlet var tableView: UITableView?
+    
+    struct list{
+        let name: String
+        let thumbnails: String
+    }
+    var ViewController2 = [list]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        // Do any additional setup after loading the view, typically from a nib.
+        
+        initializeTheList()
+        
     }
     
-    
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+        
     }
     
-    //表示するセルの中身
+    func initializeTheList() {
+        self.ViewController2 = [list(name: "Egg Benedict", thumbnails: "egg_benedict.jpg"),
+            list(name: "Mushroom Risotto", thumbnails: "mushroom_risotto.jpg")]
+    }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell: UITableViewCell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+        let identifier: String = "tableCell"
         
-        return cell
+        var cell: TableCell! = tableView.dequeueReusableCellWithIdentifier(identifier) as? TableCell
+        
+        if cell == nil {
+            cell = TableCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
+        }
+        
+        //cell!.backgroundColor = UIColor.orangeColor()
+        cell!.nameLabel!.text = ViewController2[indexPath.row].name
+        cell!.thumbnailImageView!.image = UIImage(named:ViewController2[indexPath.row].thumbnails)
+
+        
+        
+        return cell!
     }
-    
-    //行数
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return ViewController2.count
     }
     
     
     
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        
+        return 78.0
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle,
+        forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        ViewController2.removeAtIndex(indexPath.row)
+        
+        tableView.reloadData()
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "listDetail" {
+            let index = self.tableView?.indexPathForSelectedRow()
+            var destinationViewController: DetailViewController = segue.destinationViewController as!
+            DetailViewController
+            
+            destinationViewController.nameString = ViewController2[index!.row].name
+            destinationViewController.imageName = ViewController2[index!.row].thumbnails
+
+            
+                    }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        tableView.deselectRowAtIndexPath(indexPath, animated: true)
+    }
 
     /*
     // MARK: - Navigation
@@ -56,3 +110,4 @@ class ViewController2: UIViewController ,UITableViewDataSource,UITableViewDelega
     */
 
 }
+

@@ -10,6 +10,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var myPButton: UIButton!
+    
+    func initmyPButton(){
+    myPButton.layer.borderColor = UIColor.whiteColor().CGColor
+    myPButton.layer.borderWidth = 10
+    myPButton.layer.cornerRadius = 30
+    }
+    
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,7 +41,7 @@ class ViewController: UIViewController {
   
     @IBAction func push(sender : UIButton) {
         performSegueWithIdentifier("next",sender: nil)
-    }
+        }
     
     @IBAction func returnMenu(segue: UIStoryboardSegue){
         if (segue.identifier == "戻る") {

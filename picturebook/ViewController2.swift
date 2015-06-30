@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSource{
     
+    
     @IBAction func myHome(sender: UIButton) {
         
         self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
@@ -54,8 +55,8 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         //cell!.backgroundColor = UIColor.orangeColor()
-        cell!.nameLabel!.text = ViewController2[indexPath.row].name
-        cell!.thumbnailImageView!.image = UIImage(named:ViewController2[indexPath.row].thumbnails)
+        cell.nameLabel!.text = ViewController2[indexPath.row].name
+        cell.thumbnailImageView!.image = UIImage(named:ViewController2[indexPath.row].thumbnails)
 
         
         

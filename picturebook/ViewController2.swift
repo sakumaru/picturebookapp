@@ -13,6 +13,7 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
     var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     //NSUserDefaultsを使うための宣言
     let defaults = NSUserDefaults.standardUserDefaults()
+    var assetThumbnailSize:CGSize!
 
     
     
@@ -25,22 +26,14 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
     var ViewController2 = [list]()
     
     
-    required init(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
-    func tableView(tableview: UITableView ,cellForRowAtIndexPath indexPath: NSIndexPath)->UITableView {
-        var cell =  appDelegate.first
-    }
+    
+    
 
 
     
     
-    //Returning to view
-    override func viewWillAppear(animated: Bool) {
-        tableView!.reloadData();
-    }
-    
+        
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -72,10 +65,10 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
         let identifier: String = "TableCell"
         
         
-        var cell: TableCell? = tableView.dequeueReusableCellWithIdentifier(identifier) as? TableCell
         
+        var cell: TableCell? = tableView.dequeueReusableCellWithIdentifier(identifier) as? TableCell
         if cell == nil {
-            cell = TableCell(style: UITableViewCellStyle.Value1, reuseIdentifier: identifier)
+            cell = TableCell(style: UITableViewCellStyle.Value1,reuseIdentifier: identifier)
         }
         
         //cell!.backgroundColor = UIColor.orangeColor()

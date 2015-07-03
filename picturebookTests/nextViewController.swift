@@ -17,8 +17,12 @@ class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewD
     var albumFound : Bool = false
     var assetCollection: PHAssetCollection!
     var photosAsset: PHFetchResult!
-    var assetThumbnailSize:CGSize!
     var index: Int = 0
+    
+    
+    
+    
+
     
     
     var myImageView: UIImageView!
@@ -80,6 +84,16 @@ class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewD
         
     }
     
+    //リターンキーが押されたとき
+    func tapReturnKey(sender: UITextField) {
+        //ユーザーデフォルトを用意する
+        var myDefault = NSUserDefaults.standardUserDefaults()
+        //データを書き込んで
+        myDefault.setObject(sender.text, forKey: "myString")
+        //即反映させる
+        myDefault.synchronize()
+    }
+    
     
     
     
@@ -104,25 +118,25 @@ class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewD
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-}
-
     let defaults = NSUserDefaults.standardUserDefaults()
-
-
-     weak var myTextField: UITextField!
-   
     
-     weak var myTextView: UITextView!
-     weak var myTextView2: UITextView!
+    @IBOutlet var myTextField: UITextField!
+
+    @IBOutlet var myTextView: UITextView!
+
+    @IBOutlet var myTextView2: UITextView!
+    
+
     
     var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
 
 
         //AppDelegateのインスタンスを取得
-         func viewDidLoad() {
-            
-            var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-            //AppDelegateのインスタンスを取得
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+
+
     
     //昔"openKey"という鍵で保存したかどうか確認
     if ((defaults.objectForKey("openKey")) != nil){
@@ -138,8 +152,8 @@ class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewD
     //配列に追加していく
     appDelegate.myArray.append(nameString as String)
     }
-    for nameString in objects{
-    appDelegate.myArray.append("")
+      for var i = 0; i < 10; ++i {
+        appDelegate.myArray.append("")
     }
     appDelegate.myArray.removeAtIndex(0)
         
@@ -157,21 +171,33 @@ class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewD
             }
         }
 
-func dainyu() {
-    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    //AppDelegateのインスタンスを取得
-    
-    appDelegate.first = myTextField.text
-    appDelegate.second = myTextView.text
-    appDelegate.third = myTextView2.text
+
+    @IBAction func save2() {
+        var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        //AppDelegateのインスタンスを取得
+        dainyu()
+    }
 
     
- func save(){
+    func dainyu() {
+        var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     
-    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-    //AppDelegateのインスタンスを取得
-    dainyu()
-}
+        appDelegate.first = myTextField.text
+        appDelegate.second = myTextView.text
+        appDelegate.third = myTextView2.text
+        
+        appDelegate.myArray.removeAll()
+        
+        if appDelegate.first != "" {
+            appDelegate.myArray.append(appDelegate.first!)
+        }
+        if appDelegate.second != ""{
+            appDelegate.myArray.append(appDelegate.second!)
+        }
+        if appDelegate.third != ""{
+            appDelegate.myArray.append(appDelegate.third!)
+        }
+
 
 
 
@@ -209,15 +235,7 @@ func dainyu() {
 
 
 
-    //リターンキーが押されたとき
-     func tapReturnKey(sender: UITextField) {
-        //ユーザーデフォルトを用意する
-        var myDefault = NSUserDefaults.standardUserDefaults()
-        //データを書き込んで
-        myDefault.setObject(sender.text, forKey: "myString")
-        //即反映させる
-        myDefault.synchronize()
-    }
+    
   
         
     
@@ -233,8 +251,9 @@ func dainyu() {
 
 
 
+        
     
-    
+    }
 
     /*
     // MARK: - Navigation
@@ -245,5 +264,5 @@ func dainyu() {
         // Pass the selected object to the new view controller.
     }
     */
-
 }
+

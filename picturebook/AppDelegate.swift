@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var message:String?
     var myArray:[String] = [""]
     
-    var savetheme:[String] = []
+    var save:[String] = []
     
     var tag:Int = 0
     var pickerchoice:Int = 0

@@ -14,4 +14,5 @@ class TableCell : UITableViewCell {
     @IBOutlet var nameLabel: UILabel?
     @IBOutlet var thumbnailImageView: UIImageView?
     
+    
 }

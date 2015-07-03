@@ -7,14 +7,14 @@
 	<key>IDESourceControlProjectIdentifier</key>
 	<string>73125D56-4F72-4FF7-8667-E9D16A88F393</string>
 	<key>IDESourceControlProjectName</key>
-	<string>project</string>
+	<string>picturebook</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
 		<key>51C78CFACF971974B21B49200EF7C0F977B3E68A</key>
 		<string>https://github.com/sakumaru/picturebookapp.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>picturebook.xcodeproj/project.xcworkspace</string>
+	<string>picturebook.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>51C78CFACF971974B21B49200EF7C0F977B3E68A</key>

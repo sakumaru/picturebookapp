@@ -7,103 +7,176 @@
 //
 
 import UIKit
+import Photos
 
-class nextViewController: UIViewController,UITextFieldDelegate {
+let reuseIdentifier = "PhotoCell"
+let albumName = "App Folder"            //App specific folder name
+var myName = [String]()
+
+class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewDelegate, UITextViewDelegate,UICollectionViewDelegateFlowLayout, UIImagePickerControllerDelegate, UINavigationControllerDelegate,UITableViewDelegate{
+    var albumFound : Bool = false
+    var assetCollection: PHAssetCollection!
+    var photosAsset: PHFetchResult!
+    var assetThumbnailSize:CGSize!
+    var index: Int = 0
     
     
-    @IBOutlet weak var myTextField: UITextField!
-    @IBOutlet var myLabel : UILabel!
-    @IBOutlet var textAtNum : UILabel!
+    var myImageView: UIImageView!
+    
 
     
-    //空の配列を用意する
-    var stringArray : [String] = []
-    
-    //中身を確認するためのnum
-    var num = 0
-    
-    
-    //NSUserDefaultsを使うための宣言
-    let defaults = NSUserDefaults.standardUserDefaults()
+    override func viewWillAppear(animated: Bool) {
+        self.navigationController?.hidesBarsOnTap = true    //!!Added Optional Chaining
         
+        self.displayPhoto()
+    }
     
-    override func viewDidLoad() {
+    func displayPhoto(){
+        // Set targetSize of image to iPhone screen size
+        let screenSize: CGSize = UIScreen.mainScreen().bounds.size
+        let targetSize = CGSizeMake(screenSize.width, screenSize.height)
+        
+        
+        //全てのカメラロールの画像を取得する。(iCloudも含む）
+        var assets:PHFetchResult = PHAsset.fetchAssetsWithMediaType(PHAssetMediaType.Image, options: nil)
+        println(assets.debugDescription);
+        assets.enumerateObjectsUsingBlock({ obj, idx, stop in
+            
+            if obj is PHAsset
+            {
+                let asset:PHAsset = obj as! PHAsset;
+                println("Asset IDX:\(idx)");
+                println("mediaType:\(asset.mediaType)");
+                println("mediaSubtypes:\(asset.mediaSubtypes)");
+                println("pixelWidth:\(asset.pixelWidth)");
+                println("pixelHeight:\(asset.pixelHeight)");
+                println("creationDate:\(asset.creationDate)");
+                println("modificationDate:\(asset.modificationDate)");
+                println("duration:\(asset.duration)");
+                println("favorite:\(asset.favorite)");
+                println("hidden:\(asset.hidden)");
+
+        let phimgr:PHImageManager = PHImageManager();
+        phimgr.requestImageForAsset(asset,
+            targetSize: CGSize(width: 320, height: 320),
+            contentMode: .AspectFill, options: nil) {
+                image, info in
+                //ここでUIImageを取得します。
+                //self.photoImageView.image = image
+                println("UIImage get!");
+        }
+                
+            
+        }
+    });
+    
+        let fetchOptions = PHFetchOptions();
+        
+        var date:NSDate = NSDate();
+        date = NSDate(timeIntervalSinceNow: -365*24*60*60);//1年前
+        
+        fetchOptions.predicate = NSPredicate(format: "creationDate > %@", date);
+        fetchOptions.sortDescriptors =  [NSSortDescriptor(key: "creationDate", ascending: false)];
+        
+    }
+    
+    
+    
+    
+    var imageView = UIImageView(frame: CGRectMake(67,28,240,240))
+    
+     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        self.view.addSubview(imageView)
+        self.imageView.backgroundColor = UIColor.blueColor()
         
-        myTextField.delegate = self
+    }
+    
+    func btnPhotoAlbum(sender : UIButton) {
+        var picker : UIImagePickerController = UIImagePickerController()
+        picker.delegate = self
+        picker.sourceType = .PhotoLibrary
+        self.presentViewController(picker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [NSObject : AnyObject]){
+        imageView.image = info[UIImagePickerControllerOriginalImage]as? UIImage
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+}
+
+    let defaults = NSUserDefaults.standardUserDefaults()
 
 
+     weak var myTextField: UITextField!
+   
+    
+     weak var myTextView: UITextView!
+     weak var myTextView2: UITextView!
+    
+    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+
+
+        //AppDelegateのインスタンスを取得
+         func viewDidLoad() {
+            
+            var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            //AppDelegateのインスタンスを取得
     
     //昔"openKey"という鍵で保存したかどうか確認
-    if((defaults.objectForKey("openKey")) != nil){
+    if ((defaults.objectForKey("openKey")) != nil){
     
-    //objectsを配列として確定させ、前回の保存内容を格納
-    let objects = defaults.objectForKey("openKey") as? [String]
-    
-    //各名前を格納するための変数を宣言
-    var nameString:AnyObject
-    
-    //前回の保存内容が格納された配列の中身を一つずつ取り出す
-    for nameString in objects!{
+      //objectsを配列として確定させ、前回の保存内容を格納
+      let objects = defaults.objectForKey("openKey") as! [String]
+      //各名前を格納するための変数を宣言
+      var nameString:AnyObject
+        //savethemeの中をクリア
+        appDelegate.myArray.removeAll()
+        //前回の保存内容が格納された配列の中身を一つずつ取り出す
+    for nameString in objects{
     //配列に追加していく
-    stringArray.append(nameString as String)
+    appDelegate.myArray.append(nameString as String)
     }
-    
-}
-    
-  }
-    
-    //配列に保存する
-    @IBAction func save (){
+    for nameString in objects{
+    appDelegate.myArray.append("")
+    }
+    appDelegate.myArray.removeAtIndex(0)
         
-        //配列にtextfieldの文字列を保存
-        stringArray.append(self.myTextField.text)
-        
-        //配列をopenKeyで保存
-        defaults.setObject(stringArray, forKey: "openKey")
-        defaults.synchronize()
-        
-}
-    
-    
-    
-    //中身を確認する
-    @IBAction func up(){
-        
-        //stringArrayの中身があることを確認
-        if !stringArray.isEmpty == true{
+        myTextField.text = appDelegate.myArray[0]
+        myTextView.text = appDelegate.myArray[1]
+        myTextView2.text = appDelegate.myArray[2]
+
+    }
             
-            //配列の要素数以上の数字になったらエラーをおこすので、越えたら0に戻す
-            if num >= stringArray.count {
-                
-                num = 0
-                
+    else{
+        myTextField.text = appDelegate.first
+        myTextView.text = appDelegate.second
+        myTextView2.text = appDelegate.third
+        
             }
-            
-            //配列の中身を表示してあげる
-            myLabel.text = stringArray[num]
-            
-            //配列の何番目にいるのかを表示してあげる
-            textAtNum.text = String(num)
-            
-            //配列の確認する番数を増やす
-            num++
         }
-        
-    }
+
+func dainyu() {
+    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    //AppDelegateのインスタンスを取得
     
-    //保存している内容をすべて消す
-    @IBAction func clear(){
-        stringArray.removeAll()
-        defaults.removeObjectForKey("openKey")
-        myLabel.text = ""
-        textAtNum.text = ""
-        
-        }
+    appDelegate.first = myTextField.text
+    appDelegate.second = myTextView.text
+    appDelegate.third = myTextView2.text
+
     
+ func save(){
     
+    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    //AppDelegateのインスタンスを取得
+    dainyu()
+}
+
+
+
+
+
     /*
     UITextFieldが編集された直後に呼ばれるデリゲートメソッド.
     */
@@ -128,6 +201,8 @@ class nextViewController: UIViewController,UITextFieldDelegate {
         
         return true
     }
+    
+    
 
 
 
@@ -135,7 +210,7 @@ class nextViewController: UIViewController,UITextFieldDelegate {
 
 
     //リターンキーが押されたとき
-    @IBAction func tapReturnKey(sender: UITextField) {
+     func tapReturnKey(sender: UITextField) {
         //ユーザーデフォルトを用意する
         var myDefault = NSUserDefaults.standardUserDefaults()
         //データを書き込んで
@@ -144,27 +219,20 @@ class nextViewController: UIViewController,UITextFieldDelegate {
         myDefault.synchronize()
     }
   
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
+        
+    
     
         
-    @IBOutlet weak var myTextView: UITextView!
+      //  func imagePickerControllerDidCancel(picker: UIImagePickerController){
+    //   println("cancel")
+    //}
     
     
     
-    @IBOutlet weak var myTextView2: UITextView!
-  
     
-    
-    @IBAction func returnMenu(segue: UIStoryboardSegue) {
-        
-        self.presentingViewController?.presentingViewController?.dismissViewControllerAnimated(true, completion: nil)
-        
-    }
-    
-    
+
+
+
     
     
 

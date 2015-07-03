@@ -29,6 +29,26 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             viewVal = newValue // TextFieldの値をここに設定する。
         }
     }
+    
+    var message:String?
+    var myArray:[String] = [""]
+    
+    var savetheme:[String] = []
+    
+    var tag:Int = 0
+    var pickerchoice:Int = 0
+    
+    var first = String?()
+    var second = String?()
+    var third = String?()
+    
+    var Aone = String?()
+    var Atwo = String?()
+    var Athree = String?()
+    var Afour = String?()
+    var Afive = String?()
+    var Asix = String?()
+
 
 
 

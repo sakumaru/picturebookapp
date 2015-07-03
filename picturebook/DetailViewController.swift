@@ -23,7 +23,7 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         
-        navigationItem.title = nameString!
+
         
         imageView?.image = UIImage(named: imageName!)
         nameLabel?.text = nameString!

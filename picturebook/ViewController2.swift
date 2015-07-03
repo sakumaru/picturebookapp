@@ -15,30 +15,57 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
     let defaults = NSUserDefaults.standardUserDefaults()
     var assetThumbnailSize:CGSize!
 
-    
-    
-    @IBOutlet var tableView: UITableView?
-    
-    struct list{
+    struct list {
         let name: String
         let thumbnails: String
     }
-    var ViewController2 = [list]()
-    
-    
-    
-    
-    
-
+    var recipes = [list]()
 
     
+    @IBOutlet var tableView: UITableView?
     
-        
+    
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
         
+        //昔"openKey"という鍵で保存したかどうか確認
+        if ((defaults.objectForKey("openKey")) != nil){
+            
+            //objectsを配列として確定させ、前回の保存内容を格納
+            let objects = defaults.objectForKey("openKey") as! [String]
+            //各名前を格納するための変数を宣言
+            var nameString:AnyObject
+            //savethemeの中をクリア
+            appDelegate.myArray.removeAll()
+            //前回の保存内容が格納された配列の中身を一つずつ取り出す
+            for nameString in objects{
+                //配列に追加していく
+                appDelegate.myArray.append(nameString as String)
+            }
+            for var i = 0; i < 10; ++i {
+                appDelegate.myArray.append("")
+            }
+            appDelegate.myArray.removeAtIndex(0)
+            
+           TableCell.self;name.text = appDelegate.myArray[0]
+            
+        }
+            
+        else{
+            TableCell.self;nameLabel.text = appDelegate.first
+         
+
+        
+    
+    
     }
+        
+    }
+    
+
     
     
     
@@ -46,6 +73,7 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
     
     
     @IBOutlet weak var myTableCell: TableCell!
+    
     @IBAction func save(){
         var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         //AppDelegateのインスタンスを取得
@@ -72,8 +100,8 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
         }
         
         //cell!.backgroundColor = UIColor.orangeColor()
-        cell!.nameLabel?.text = ViewController2[indexPath.row].name
-        cell!.thumbnailImageView?.image = UIImage(named:ViewController2[indexPath.row].thumbnails)
+        cell!.nameLabel?.text = ViewController2()[indexPath.row].name
+        cell!.thumbnailImageView?.image = UIImage(named:ViewController2()[indexPath.row].thumbnails)
         
         
         
@@ -116,8 +144,9 @@ class ViewController2: UIViewController, UITableViewDelegate, UITableViewDataSou
             var destinationViewController: DetailViewController = segue.destinationViewController as!
             DetailViewController
             
-            destinationViewController.nameString = ViewController2[index!.row].name
-            destinationViewController.imageName = ViewController2[index!.row].thumbnails
+            destinationViewController.nameString = ViewController2()[index!.row].name
+            destinationViewController.
+            = ViewController2[index!.row].thumbnails
             
             
         }

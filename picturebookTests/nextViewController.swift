@@ -157,16 +157,16 @@ class nextViewController: UIViewController,UITextFieldDelegate,UICollectionViewD
     }
     appDelegate.myArray.removeAtIndex(0)
         
-        myTextField.text = appDelegate.myArray[0]
-        myTextView.text = appDelegate.myArray[1]
-        myTextView2.text = appDelegate.myArray[2]
+        appDelegate.myArray[0] = myTextField.text
+        appDelegate.myArray[1] = myTextView.text
+        appDelegate.myArray[2] = myTextView2.text
 
     }
             
     else{
-        myTextField.text = appDelegate.first
-        myTextView.text = appDelegate.second
-        myTextView2.text = appDelegate.third
+        appDelegate.first = myTextField.text
+        appDelegate.second = myTextView.text
+        appDelegate.third = myTextView2.text
         
             }
         }

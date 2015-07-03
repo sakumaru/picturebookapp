@@ -14,5 +14,23 @@ class TableCell : UITableViewCell {
     @IBOutlet var nameLabel: UILabel?
     @IBOutlet var thumbnailImageView: UIImageView?
     
+    //AppDelegateのインスタンスを取得
+    var appDelegate:AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    
+    var name: String?
+    var imageName: String?
+    
+    override func prepareForReuse() {
+    
+        UIImage(named: imageName!) = thumbnailImageView?.image
+        name! = nameLabel?.text!
+
+        
+
+           
+        
+    }
+    
     
 }
+
